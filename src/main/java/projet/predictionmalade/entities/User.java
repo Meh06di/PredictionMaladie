@@ -5,12 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.UUID;
 @Entity
 @Data @AllArgsConstructor @NoArgsConstructor
-public class User {
+public class User implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String nom;
@@ -25,5 +26,7 @@ public class User {
     private Compte compte;
     @OneToMany(mappedBy = "user")
     private Collection<HistoryCompte> historyComptes;
+    @OneToMany(mappedBy = "user")
+    private Collection<Malade> malades;
 }
 

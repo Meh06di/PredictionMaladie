@@ -5,11 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
-public class HistoryCompte {
+public class HistoryCompte implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String type;
