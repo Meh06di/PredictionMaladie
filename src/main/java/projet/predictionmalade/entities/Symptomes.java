@@ -8,18 +8,12 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+
 @Entity
 @Data @NoArgsConstructor
 @AllArgsConstructor
-public class Malade implements Serializable {
+public class Symptomes implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String maladeNom;
-    private String status;
-    @ManyToOne
-    private User user;
-    @ManyToMany
-    private Collection<Symptomes> symptomes;
+    private String name;
 }

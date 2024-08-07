@@ -21,9 +21,7 @@ public class User implements Serializable {
     private String prenom;
     @Temporal(TemporalType.DATE)
     private Date dateNaissance;
-    private String Username;
-    @OneToOne
-    private Compte compte;
+    private String username;
     @OneToMany(mappedBy = "user")
     private Collection<HistoryCompte> historyComptes;
     @OneToMany(mappedBy = "user")
