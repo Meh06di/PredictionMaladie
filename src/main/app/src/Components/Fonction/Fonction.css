@@ -1,0 +1,31 @@
+/* src/components/Fonction.css */
+.fonctions {
+    margin: 80px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Pour gérer les écrans plus petits */
+}
+
+.fonction {
+    flex-basis: 31%;
+    text-align: center;
+    margin-bottom: 20px; /* Espace sous chaque élément */
+}
+
+.fonction img {
+    width: 100%;
+    height: auto; /* Maintient le rapport d'aspect des images */
+    max-height: 280px; /* Hauteur maximale uniforme */
+    border-radius: 10px;
+    display: block;
+    object-fit: cover; /* Ajuste l'image pour qu'elle couvre le conteneur */
+}
+
+.fonction p {
+    margin-top: 10px; /* Espace au-dessus de la description */
+    font-size: 20px;
+    color: #131212;
+    line-height: 1.4; /* Améliore la lisibilité */
+}
