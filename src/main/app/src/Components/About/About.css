@@ -1,0 +1,56 @@
+/* src/components/About.css */
+.about {
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    padding: 40px;
+    border-radius: 10px;
+    color: #676767;
+    line-height: 1.6;
+    margin-bottom: 50px; /* Ajusté pour améliorer la lisibilité */
+}
+
+.about ul {
+    display: flex;
+    flex-wrap: wrap; /* Permet aux éléments de se déplacer sur plusieurs lignes si nécessaire */
+    justify-content: space-around; /* Répartit les éléments de manière égale avec des espaces entre eux */
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.about ul li {
+    width: 100%; /* Prend toute la largeur disponible */
+    max-width: 450px; /* Définir une largeur maximale pour chaque élément */
+    box-sizing: border-box; /* Inclut les marges et le padding dans la largeur totale */
+    padding: 20px;
+    margin-bottom: 20px; /* Espacement entre les éléments */
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-info img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+}
+
+.user-info h3 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.user-info span {
+    display: block;
+    font-size: 16px;
+    color: #666;
+}
+
+.user p {
+    font-size: 16px;
+    color: #524f4f;
+    line-height: 1.5;
+}

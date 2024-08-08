@@ -1,0 +1,27 @@
+.desc{
+    margin : 100px auto;
+    display : flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+}
+.left{
+    flex-basis: 40%;
+}
+.right{
+    flex-basis: 56%;
+}
+.desc-img{
+    width: 100%;
+    border-radius: 10px;
+}
+.desc h1{
+    font-weight: 600;
+    font-weight: 16px;
+    color: #212EA0;
+}
+.desc p{
+    color : #121111;
+    font-size: 17px;
+    margin-bottom: 20px;
+}
