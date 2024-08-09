@@ -19,7 +19,7 @@ public class PredictionMaladeApplication {
 	@Bean
 	CommandLineRunner run(PredictionMaladeApplication app, UserService userService) {
 		return args -> {
-			User user = new User(null,"mehdi","mehdi@gmain.com","0989","1234","ouakyl",new Date(),"med",null,null);
+			User user = new User(null,"mehdi","mehdi@gmain.com","1234","ouakyl",new Date(),"med",1,null,null);
 			userService.saveUser(user);
 		};
 	}
