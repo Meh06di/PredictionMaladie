@@ -7,22 +7,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+
 @Entity
 @Data @NoArgsConstructor
 @AllArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Malade implements Serializable {
+public class Role {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String maladeNom;
-    private String status;
-    @ManyToOne
-    private User user;
-    @ManyToMany
-    private Collection<Symptomes> symptomes;
+    private int id;
+    private String role;
+    @ManyToMany(mappedBy = "roles")
+    private Collection<User> users;
 }

@@ -1,5 +1,7 @@
 package projet.predictionmalade.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,6 +14,7 @@ import java.util.UUID;
 @Entity
 @Data @AllArgsConstructor @NoArgsConstructor
 @Table(name = "users")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -27,5 +30,7 @@ public class User implements Serializable {
     private Collection<HistoryCompte> historyComptes;
     @OneToMany(mappedBy = "user")
     private Collection<Malade> malades;
+    @ManyToMany()
+    private Collection<Role> roles;
 }
 

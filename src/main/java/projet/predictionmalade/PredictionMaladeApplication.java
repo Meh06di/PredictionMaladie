@@ -16,12 +16,13 @@ public class PredictionMaladeApplication {
 		SpringApplication.run(PredictionMaladeApplication.class, args);
 	}
 
-	@Bean
-	CommandLineRunner run(PredictionMaladeApplication app, UserService userService) {
-		return args -> {
-			User user = new User(null,"mehdi","mehdi@gmain.com","1234","ouakyl",new Date(),"med",1,null,null);
-			userService.saveUser(user);
-		};
-	}
+//	@Bean
+//	CommandLineRunner run(PredictionMaladeApplication app, UserService userService) {
+//		return args -> {
+//			User user = new User(null,"mehdi","mehdi@gmain.com","1234","ouakyl",new Date(),"med",1,null,null
+//					,null);
+//			userService.saveUser(user);
+//		};
+//	}
 
 }
