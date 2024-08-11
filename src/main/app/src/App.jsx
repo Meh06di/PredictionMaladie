@@ -10,14 +10,14 @@ import Footer from './Components/Footer/Footer.jsx'
 const App = () => {
   return (
       <div>
-      <Nav />
-      <Header />
-      <Description />
-      <Title title="Principales Fonctionnalités" />
-      <Fonction />
-      <Title title="À Propos De Nous" />
-      <About />
-      <Footer />
+          <Nav/>
+          <Header/>
+          <Description/>
+          <Title title="Principales Fonctionnalités"/>
+          <Fonction/>
+          <Title title="À Propos De Nous"/>
+          <About/>
+          <Footer/>
       </div>
   )
 }

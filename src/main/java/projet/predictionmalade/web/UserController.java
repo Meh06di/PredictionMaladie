@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.*;
 import projet.predictionmalade.dao.UserRepository;
 import projet.predictionmalade.entities.HistoryCompte;
 import projet.predictionmalade.entities.User;
+import projet.predictionmalade.service.MLService;
 import projet.predictionmalade.service.UserService;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 // UserController.java
@@ -44,6 +46,14 @@ public class UserController {
     @PostMapping("/{userId}/operations")
     public void addOperation(@PathVariable UUID userId, @RequestParam String type, @RequestParam String details) {
         userService.addOperation(userId, type, details);
+    }
+    @Autowired
+    private MLService mlService;
+
+    @PostMapping("/predict")
+    public Map<String, Object> predict(@RequestBody Map<String, Object> inputParams) {
+        String prediction = mlService.getPrediction(inputParams);
+        return Map.of("prediction", prediction);
     }
 }
 
