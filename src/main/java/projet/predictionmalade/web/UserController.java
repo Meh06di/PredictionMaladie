@@ -2,6 +2,11 @@ package projet.predictionmalade.web;
 
 // UserController.java
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 import projet.predictionmalade.dao.UserRepository;
 import projet.predictionmalade.entities.HistoryCompte;
@@ -18,6 +23,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = "http://localhost:5173")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -25,13 +31,33 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping("/signUp")
-    public void signUp(@RequestBody User user) {
-        userService.saveUser(user);
+    public ResponseEntity<String> signUpUser(@RequestBody User user) {
+        try {
+            userService.saveUser(user);
+            return ResponseEntity.ok("User successfully signed up");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
     @PostMapping("/login")
-    public User createUser(@RequestBody User user) {
-        return userService.saveUser(user);
+    public ResponseEntity<?> login(@RequestBody User user) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword())
+            );
+
+            // If authentication is successful, return a success message or token (JWT, etc.)
+            return ResponseEntity.ok("User successfully logged in");
+
+        } catch (AuthenticationException e) {
+            // If authentication fails, return an error response
+            return ResponseEntity.status(401).body("Invalid email or password");
+        }
     }
+
     @GetMapping("/{username}/profil")
     public User getProfile(@PathVariable String username) {
         User user = userRepository.findByUsername(username);

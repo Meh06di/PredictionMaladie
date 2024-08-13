@@ -4,6 +4,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import projet.predictionmalade.entities.User;
 import projet.predictionmalade.service.UserService;
 
@@ -16,13 +18,9 @@ public class PredictionMaladeApplication {
 		SpringApplication.run(PredictionMaladeApplication.class, args);
 	}
 
-//	@Bean
-//	CommandLineRunner run(PredictionMaladeApplication app, UserService userService) {
-//		return args -> {
-//			User user = new User(null,"mehdi","mehdi@gmain.com","1234","ouakyl",new Date(),"med",1,null,null
-//					,null);
-//			userService.saveUser(user);
-//		};
-//	}
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
 }

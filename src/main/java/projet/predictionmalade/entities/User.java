@@ -22,15 +22,14 @@ public class User implements Serializable {
     private String email;
     private String password;
     private String prenom;
-    @Temporal(TemporalType.DATE)
-    private Date dateNaissance;
     private String username;
-    private int enabled;
+    private boolean enabled = true;
     @OneToMany(mappedBy = "user")
     private Collection<HistoryCompte> historyComptes;
     @OneToMany(mappedBy = "user")
     private Collection<Malade> malades;
     @ManyToMany()
     private Collection<Role> roles;
+
 }
 

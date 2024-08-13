@@ -6,9 +6,7 @@ const SignUp = () => {
         nom: '',
         prenom: '',
         email: '',
-        phone: '',
         password: '',
-        dateNaissance: '',
         username: '',
     });
 
@@ -22,7 +20,7 @@ const SignUp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('/api/signup', {
+            const response = await fetch('http://localhost:8081/users/signUp', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -73,28 +71,6 @@ const SignUp = () => {
                             id="email"
                             name="email"
                             value={formData.email}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="phone">Phone</label>
-                        <input
-                            type="text"
-                            id="phone"
-                            name="phone"
-                            value={formData.phone}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="dateNaissance">Date de Naissance</label>
-                        <input
-                            type="date"
-                            id="dateNaissance"
-                            name="dateNaissance"
-                            value={formData.dateNaissance}
                             onChange={handleChange}
                             required
                         />

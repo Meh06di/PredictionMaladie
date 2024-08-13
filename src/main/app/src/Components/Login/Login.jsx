@@ -7,6 +7,8 @@ const Login = () => {
         password: '',
     });
 
+    const [error, setError] = useState('');
+
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -17,19 +19,25 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('/api/login', {
+            const response = await fetch('http://localhost:8081/users/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify({
+                    email: formData.email,  // use formData.email
+                    password: formData.password,  // use formData.password
+                }),
+                credentials: 'include',
             });
             if (response.ok) {
                 console.log('User successfully logged in');
+                // Redirect or perform other actions on success
             } else {
-                console.error('Failed to log in user');
+                setError('Failed to log in. Please check your credentials.');
             }
         } catch (error) {
+            setError('Error occurred during login.');
             console.error('Error:', error);
         }
     };
@@ -38,6 +46,7 @@ const Login = () => {
         <div className="login">
             <div className="login-container">
                 <h2>Login</h2>
+                {error && <div className="error-message">{error}</div>}
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="email">Email</label>

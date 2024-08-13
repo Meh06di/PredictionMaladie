@@ -4,6 +4,7 @@ package projet.predictionmalade.service;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import projet.predictionmalade.dao.MaladeRespository;
@@ -33,13 +34,21 @@ public class UserService {
     private SymptomesRepository symptomesRepository;
     @Autowired
     private MaladeRespository maladeRepository;
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
+    @Autowired
+    public PasswordEncoder passwordEncoder;
 
-    public User saveUser(User user) {
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+    public boolean emailExists(String email) {
+        return userRepository.findByEmail(email) != null;
     }
+
+    public void saveUser(User user) {
+        if (emailExists(user.getEmail())) {
+            throw new IllegalArgumentException("Email already exists");
+        }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+    }
+
 
     public List<HistoryCompte> getUserOperations(UUID userId) {
         return historyCompte.findByUserId(userId);
