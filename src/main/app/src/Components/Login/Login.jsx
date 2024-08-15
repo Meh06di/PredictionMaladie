@@ -24,15 +24,12 @@ const Login = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    email: formData.email,  // use formData.email
-                    password: formData.password,  // use formData.password
-                }),
+                body: JSON.stringify(formData), // Directly using formData
                 credentials: 'include',
             });
             if (response.ok) {
                 console.log('User successfully logged in');
-                // Redirect or perform other actions on success
+                // You can redirect the user or perform other actions on success here
             } else {
                 setError('Failed to log in. Please check your credentials.');
             }
@@ -73,7 +70,7 @@ const Login = () => {
                     <button type="submit">Log In</button>
                 </form>
                 <div className="signup-link">
-                    <p>Don't have an account?</p>
+                    <p>Don't have an account? <a href="/users/signUp">Sign up</a></p>
                 </div>
             </div>
         </div>

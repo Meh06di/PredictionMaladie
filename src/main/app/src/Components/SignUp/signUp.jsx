@@ -10,6 +10,10 @@ const SignUp = () => {
         username: '',
     });
 
+    const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -17,8 +21,15 @@ const SignUp = () => {
         });
     };
 
+    const toggleShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError('');
+        setSuccess('');
+
         try {
             const response = await fetch('http://localhost:8081/users/signUp', {
                 method: 'POST',
@@ -27,13 +38,17 @@ const SignUp = () => {
                 },
                 body: JSON.stringify(formData),
             });
+
+            const data = await response.text();
+
             if (response.ok) {
-                console.log('User successfully signed up');
+                setSuccess('User registered successfully. Please check your email to confirm your account.');
             } else {
-                console.error('Failed to sign up user');
+                setError(data);
             }
         } catch (error) {
             console.error('Error:', error);
+            setError('An error occurred while signing up.');
         }
     };
 
@@ -89,7 +104,7 @@ const SignUp = () => {
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
                         <input
-                            type="password"
+                            type={showPassword ? 'text' : 'password'}
                             id="password"
                             name="password"
                             value={formData.password}
@@ -97,6 +112,18 @@ const SignUp = () => {
                             required
                         />
                     </div>
+                    <div className="form-group">
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={showPassword}
+                                onChange={toggleShowPassword}
+                            />
+                            Show Password
+                        </label>
+                    </div>
+                    {error && <p className="error">{error}</p>}
+                    {success && <p className="success">{success}</p>}
                     <button type="submit">Sign Up</button>
                 </form>
                 <div className="login-link">

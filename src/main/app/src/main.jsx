@@ -7,6 +7,6 @@ import './index.css'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Login />
+    <SignUp />
   </React.StrictMode>,document.getElementById("root")
 )
