@@ -23,15 +23,13 @@ public class User implements Serializable {
     private String password;
     private String prenom;
     private String username;
-    private boolean enabled = false;
-    private String codeVerification;
+
     @OneToMany(mappedBy = "user")
     private Collection<HistoryCompte> historyComptes;
     @OneToMany(mappedBy = "user")
     private Collection<Malade> malades;
     @ManyToMany()
     private Collection<Role> roles;
-    @OneToMany(mappedBy = "user")
-    private Collection<ConfirmationToken> confirmationTokens;
+
 }
 

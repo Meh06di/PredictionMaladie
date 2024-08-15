@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import projet.predictionmalade.dao.UserRepository;
 import projet.predictionmalade.entities.HistoryCompte;
 import projet.predictionmalade.entities.User;
-import projet.predictionmalade.service.ConfirmationTokenService;
 import projet.predictionmalade.service.MLService;
 import projet.predictionmalade.service.UserService;
 
@@ -32,8 +31,7 @@ public class UserController {
     private UserService userService;
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private ConfirmationTokenService confirmationTokenService;
+
 
 
 
@@ -50,39 +48,12 @@ public class UserController {
         }
 
         // Set the user as disabled initially (not verified)
-        user.setEnabled(false);
-
-        try {
-            user.setCodeVerification(String.format("%06d",new Random().nextInt()));
             userRepository.save(user);
 
-            confirmationTokenService.sendConfirmationToken(user);
+
 
             return ResponseEntity.ok("User registered successfully. Please check your email to confirm your account.");
 
-        } catch (Exception e) {
-            // Handle exceptions (like email sending failure)
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to send confirmation email. Please try again later.");
-        }
-    }
-    @PostMapping("/verifyCode")
-    public ResponseEntity<?> verifyCode(@RequestParam("email") String email, @RequestParam("code") String code) {
-        User user = userRepository.findByEmail(email);
-
-        if (user == null) {
-            return ResponseEntity.badRequest().body("Invalid email address.");
-        }
-
-        if (!user.getCodeVerification().equals(code)) {
-            return ResponseEntity.badRequest().body("Invalid verification code.");
-        }
-
-        // If the code matches, enable the user's account
-        user.setEnabled(true);
-        user.setCodeVerification(null); // Optionally clear the code after verification
-        userRepository.save(user);
-
-        return ResponseEntity.ok("Account verified successfully.");
     }
 
     @Autowired
@@ -103,15 +74,7 @@ public class UserController {
             return ResponseEntity.status(401).body("Invalid email or password");
         }
     }
-    @GetMapping("/confirm")
-    public ResponseEntity<?> confirm(@RequestParam("token") String token) {
-        try {
-            String result = confirmationTokenService.confirmToken(token);
-            return ResponseEntity.ok(result);
-        } catch (IllegalStateException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
+
 
     @GetMapping("/{username}/profil")
     public User getProfile(@PathVariable String username) {
