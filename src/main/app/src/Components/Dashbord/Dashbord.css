@@ -1,0 +1,27 @@
+.dashboard {
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+/*.dashboard-background {
+    background-image: url('../../assets/background.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}*/
+
+.dashboard-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chart-container {
+    width: 80%;
+    margin: 20px 0;
+}
+
+.table-container {
+    width: 80%;
+    margin: 20px 0;
+}

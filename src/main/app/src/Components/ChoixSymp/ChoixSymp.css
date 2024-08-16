@@ -1,0 +1,61 @@
+/* src/Components/ChoixSymp.css */
+.symptom-page {
+    font-family: Arial, sans-serif;
+    padding-top: 60px; /* Ajustez si nécessaire pour le header fixe */
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.page-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 160px); /* Ajustez en fonction de la hauteur du footer et du header */
+    padding: 20px; /* Ajouter de l'espace autour du conteneur */
+}
+
+.prediction-container {
+    width: 100%;
+    max-width: 600px; /* Augmentez la largeur maximale pour le div */
+    padding: 30px; /* Augmentez le padding pour plus d'espace intérieur */
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Ombre plus prononcée */
+    text-align: center; /* Centre le texte à l'intérieur du conteneur */
+}
+
+.prediction-container h2 {
+    margin-bottom: 20px; /* Ajoute un espace entre le titre et le sélecteur */
+}
+
+.symptom-select {
+    width: 100%; /* Assure que le sélecteur occupe toute la largeur du conteneur */
+    margin-bottom: 20px;
+}
+
+.submit-button {
+    background-color: #0c5093;
+    color: white;
+    border: none;
+    padding: 12px 24px; /* Augmente le padding pour un bouton plus grand */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px; /* Augmente la taille de la police du bouton */
+}
+
+.submit-button:hover {
+    background-color: #092d56;
+}
+
+.page-footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #10457a;
+    color: white;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
