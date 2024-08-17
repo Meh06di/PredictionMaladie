@@ -1,0 +1,63 @@
+/* src/Components/Navbar/Navbar.css */
+.navbar {
+    background-color: #10457a;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centre le contenu horizontalement */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Assure que la navbar reste au-dessus du contenu */
+}
+
+.navbar-container {
+    display: flex;
+    align-items: center;
+    width: 100%; /* Prend tout l'espace horizontal */
+    max-width: 1200px; /* Ajustez cette valeur selon la largeur de votre contenu */
+    justify-content: space-between; /* Espacement entre le logo et le titre */
+    position: relative; /* Assure que le titre peut se centrer correctement */
+}
+
+.navbar-logo {
+    width: 50px; /* Ajustez la taille du logo selon vos besoins */
+    height: auto;
+    margin-right: 15px; /* Espacement entre le logo et le titre */
+}
+
+.navbar-title {
+    font-size: 24px;
+    margin: 0;
+    text-align: center;
+    flex: 1; /* Permet au titre de prendre tout l'espace disponible */
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Aligne les liens de navigation à droite */
+}
+
+.navbar-links ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-links li {
+    margin-left: 20px; /* Espacement entre les liens */
+}
+
+.navbar-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.navbar-links a:hover {
+    text-decoration: underline; /* Effet au survol pour les liens */
+}
