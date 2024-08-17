@@ -3,16 +3,13 @@ import './signUp.css';
 
 const SignUp = () => {
     const [formData, setFormData] = useState({
-        nom: '',
-        prenom: '',
         email: '',
         password: '',
-        username: '',
+        confirmPassword: '',
     });
 
-    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
+    const [success, setSuccess] = useState(''); // Ajoutez cette ligne pour définir success
 
     const handleChange = (e) => {
         setFormData({
@@ -21,34 +18,25 @@ const SignUp = () => {
         });
     };
 
-    const toggleShowPassword = () => {
-        setShowPassword(!showPassword);
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError('');
-        setSuccess('');
-
         try {
-            const response = await fetch('http://localhost:8081/users/signUp', {
+            const response = await fetch('http://localhost:8081/users/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(formData),
+                credentials: 'include',
             });
-
-            const data = await response.text();
-
             if (response.ok) {
-                setSuccess('User registered successfully. Please check your email to confirm your account.');
+                setSuccess('Registration successful!'); // Exemple de message de succès
             } else {
-                setError(data);
+                setError('Failed to sign up. Please check your details.');
             }
         } catch (error) {
+            setError('Error occurred during registration.');
             console.error('Error:', error);
-            setError('An error occurred while signing up.');
         }
     };
 
@@ -91,6 +79,17 @@ const SignUp = () => {
                         />
                     </div>
                     <div className="form-group">
+                        <label htmlFor="phone">Phone</label>
+                        <input
+                            type="text"
+                            id="phone"
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
                         <label htmlFor="username">Username</label>
                         <input
                             type="text"
@@ -104,7 +103,7 @@ const SignUp = () => {
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
                         <input
-                            type={showPassword ? 'text' : 'password'}
+                            type="password"
                             id="password"
                             name="password"
                             value={formData.password}
@@ -112,22 +111,12 @@ const SignUp = () => {
                             required
                         />
                     </div>
-                    <div className="form-group">
-                        <label>
-                            <input
-                                type="checkbox"
-                                checked={showPassword}
-                                onChange={toggleShowPassword}
-                            />
-                            Show Password
-                        </label>
-                    </div>
-                    {error && <p className="error">{error}</p>}
-                    {success && <p className="success">{success}</p>}
                     <button type="submit">Sign Up</button>
                 </form>
+                {success && <p className="success-message">{success}</p>}
+                {error && <p className="error-message">{error}</p>}
                 <div className="login-link">
-                    <p>Already have an account?</p>
+                    <p>Already have an account? <a href="/users/login">Log in</a></p>
                 </div>
             </div>
         </div>
