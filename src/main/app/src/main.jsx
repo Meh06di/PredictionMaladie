@@ -5,8 +5,9 @@ import SignUp from "./Components/SignUp/signUp.jsx";
 import Login from './Components/Login/Login.jsx'
 import './index.css'
 
+
 ReactDOM.render(
   <React.StrictMode>
-    <SignUp />
+    <Login />
   </React.StrictMode>,document.getElementById("root")
 )

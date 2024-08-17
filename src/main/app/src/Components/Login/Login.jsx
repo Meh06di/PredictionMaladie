@@ -24,12 +24,11 @@ const Login = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData), // Directly using formData
+                body: JSON.stringify(formData),
                 credentials: 'include',
             });
             if (response.ok) {
                 console.log('User successfully logged in');
-                // You can redirect the user or perform other actions on success here
             } else {
                 setError('Failed to log in. Please check your credentials.');
             }
@@ -43,7 +42,6 @@ const Login = () => {
         <div className="login">
             <div className="login-container">
                 <h2>Login</h2>
-                {error && <div className="error-message">{error}</div>}
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
@@ -69,6 +67,7 @@ const Login = () => {
                     </div>
                     <button type="submit">Log In</button>
                 </form>
+                {error && <p className="error-message">{error}</p>}
                 <div className="signup-link">
                     <p>Don't have an account? <a href="/users/signUp">Sign up</a></p>
                 </div>
