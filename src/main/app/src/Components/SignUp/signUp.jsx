@@ -3,9 +3,12 @@ import './signUp.css';
 
 const SignUp = () => {
     const [formData, setFormData] = useState({
+        nom : '',
+        prenom: '',
         email: '',
+        phone: '',
+        username: '',
         password: '',
-        confirmPassword: '',
     });
 
     const [error, setError] = useState('');
@@ -21,7 +24,7 @@ const SignUp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:8081/users/signup', {
+            const response = await fetch('http://localhost:8081/users/signUp', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

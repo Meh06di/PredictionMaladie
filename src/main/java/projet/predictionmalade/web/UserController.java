@@ -47,11 +47,7 @@ public class UserController {
             return ResponseEntity.badRequest().body("Username is already in use.");
         }
 
-        // Set the user as disabled initially (not verified)
-            userRepository.save(user);
-
-
-
+            userService.saveUser(user);
             return ResponseEntity.ok("User registered successfully. Please check your email to confirm your account.");
 
     }
