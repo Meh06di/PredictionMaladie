@@ -23,7 +23,7 @@ public class User implements Serializable {
     private String password;
     private String prenom;
     private String username;
-
+    private String phone;
     @OneToMany(mappedBy = "user")
     private Collection<HistoryCompte> historyComptes;
     @OneToMany(mappedBy = "user")
