@@ -9,11 +9,11 @@ const Fonction = () => {
     <div className='fonctions'>
       <div className='fonction'>
         <img src={securite} alt="Sécurité de la plateforme" />
-        <p>Sécurité de la plateforme</p>
+        <p>Sécurité complète de la plateforme</p>
       </div>
       <div className='fonction'>
         <img src={pred} alt="Prédiction des maladies" />
-        <p>Prédiction des maladies à partir des symptômes</p>
+        <p>Prédiction des maladies via symptômes</p>
       </div>
       <div className='fonction'>
         <img src={chat} alt="Chatbot" />

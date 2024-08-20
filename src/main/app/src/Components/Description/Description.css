@@ -1,27 +1,64 @@
-.desc{
-    margin : 100px auto;
-    display : flex;
+.desc {
+    margin: 100px auto;
+    display: flex;
     align-items: center;
     justify-content: space-between;
     width: 90%;
+    box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur totale */
 }
-.left{
-    flex-basis: 40%;
+
+.left, .right {
+    flex-basis: 48%;
+    margin: 10px;
 }
-.right{
-    flex-basis: 56%;
-}
-.desc-img{
+
+.desc-img {
     width: 100%;
     border-radius: 10px;
 }
-.desc h1{
+
+.desc h1 {
     font-weight: 600;
-    font-weight: 16px;
+    font-size: 24px;
     color: #212EA0;
+    margin-bottom: 8px;
 }
-.desc p{
-    color : #121111;
+
+.desc p {
+    color: #121111;
     font-size: 17px;
-    margin-bottom: 20px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+
+@media (max-width: 768px) {
+    .desc {
+        flex-direction: column; /* Empile l'image et le texte verticalement */
+        align-items: center;
+    }
+
+    .left, .right {
+        flex-basis: 100%; /* Chaque section prend toute la largeur */
+        margin: 10px 0;
+    }
+
+    .desc h1 {
+        font-size: 20px;
+    }
+
+    .desc p {
+        font-size: 15px;
+    }
+}
+
+/* Styles pour les très petits écrans (mobiles) */
+@media (max-width: 480px) {
+    .desc h1 {
+        font-size: 18px;
+    }
+
+    .desc p {
+        font-size: 14px;
+    }
 }

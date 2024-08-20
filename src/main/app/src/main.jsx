@@ -8,6 +8,7 @@ import ChatBoot from './Components/ChatBoot/ChatBoot.jsx';
 import SymptomForm from './Components/ChoixSymp/ChoixSymp.jsx';
 import DiseasePrediction from './Components/DiseasePrediction/DiseasePrediction.jsx';
 import './index.css';
+import UserDashboard from "./Components/UserDashbord/UserDashbord.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -18,9 +19,7 @@ root.render(
                 <Route path="/" element={<App />} />
                 <Route path="/users/signUp" element={<SignUp />} />
                 <Route path="/users/login" element={<Login />} />
-                <Route path="/chatbot" element={<ChatBoot />} />
-                <Route path="/symptoms" element={<SymptomForm />} />
-                <Route path="/results" element={<DiseasePrediction />} />
+                <Route path="/dashboard" element={<UserDashboard />} />
             </Routes>
         </BrowserRouter>
     </React.StrictMode>

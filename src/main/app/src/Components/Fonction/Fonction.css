@@ -1,11 +1,10 @@
-/* src/components/Fonction.css */
 .fonctions {
-    margin: 80px;
+    margin: 80px auto;
     width: 90%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap; /* Pour gérer les écrans plus petits */
+    flex-wrap: wrap;
 }
 
 .fonction {
@@ -28,4 +27,25 @@
     font-size: 20px;
     color: #131212;
     line-height: 1.4; /* Améliore la lisibilité */
+}
+
+/* Styles pour les écrans plus petits */
+@media (max-width: 768px) {
+    .fonction {
+        flex-basis: 48%; /* Chaque fonction prend environ la moitié de la largeur */
+    }
+}
+
+@media (max-width: 480px) {
+    .fonctions {
+        justify-content: center; /* Centrer les éléments pour les petits écrans */
+    }
+
+    .fonction {
+        flex-basis: 100%; /* Chaque fonction prend toute la largeur */
+    }
+
+    .fonction p {
+        font-size: 18px; /* Réduire la taille de la police pour les petits écrans */
+    }
 }
