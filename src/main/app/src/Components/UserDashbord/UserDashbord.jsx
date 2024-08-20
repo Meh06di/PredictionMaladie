@@ -10,6 +10,8 @@ import user from '../../assets/user.jpg'
 import HomeComponent from '../HomeComponent/HomeComponent.jsx';
 import SymptomsComponent from '../ChoixSymp/ChoixSymp.jsx'
 import ConsultationsComponent from '../ChatBoot/ChatBoot.jsx'
+import ProfileComponent from '../ProfileComponent/ProfileComponent.jsx'
+import HistoryComponent from "../HistoryComponent/HistoryComponent.jsx";
 /*import PredictionComponent from './PredictionComponent';
 import SymptomsComponent from './SymptomsComponent';
 import ConsultationsComponent from './ConsultationsComponent';
@@ -17,6 +19,23 @@ import ProfileComponent from './ProfileComponent';*/
 
 const Dashboard = () => {
     const [activeComponent, setActiveComponent] = useState('home');
+    const examplePredictions = [
+        {
+            date: '2024-08-15',
+            symptoms: 'Fever, Cough, Shortness of breath',
+            result: 'Possible flu',
+        },
+        {
+            date: '2024-08-14',
+            symptoms: 'Headache, Nausea, Fatigue',
+            result: 'Possible migraine',
+        },
+        {
+            date: '2024-08-13',
+            symptoms: 'Sore throat, Runny nose, Mild fever',
+            result: 'Possible cold',
+        }
+    ];
 
     const renderContent = () => {
         switch (activeComponent) {
@@ -25,7 +44,7 @@ const Dashboard = () => {
             case 'Disease Prediction':
                 return <SymptomsComponent />;
             case 'symptoms':
-                return <ConsultationsComponent />;
+                return <HistoryComponent predictions={examplePredictions} />;
             case 'consultations':
                 return <ConsultationsComponent />;
             case 'profile':

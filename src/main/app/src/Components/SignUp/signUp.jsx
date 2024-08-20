@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import './signUp.css';
+import {Col, Container, Row} from "react-bootstrap";
+import sign from '../../assets/sign.png'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 const SignUp = () => {
     const [formData, setFormData] = useState({
@@ -44,86 +48,93 @@ const SignUp = () => {
     };
 
     return (
-        <div className="signup">
-            <div className="signup-container">
-                <h2>Sign Up</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="nom">Nom</label>
-                        <input
-                            type="text"
-                            id="nom"
-                            name="nom"
-                            value={formData.nom}
-                            onChange={handleChange}
-                            required
-                        />
+        <section className="contact" id="connect">
+            <Container>
+                <Row className="align-items-center">
+                    <Col md={6}>
+                        <img src={sign} alt="signup image" />
+                    </Col>
+                    <Col md={6}>
+                        <h1>Sign Up</h1>
+                        <form onSubmit={handleSubmit}>
+                            <Row>
+                                <Col sm={6} className="px-1">
+                                    <input
+                                        type="text"
+                                        id="nom"
+                                        name="nom"
+                                        value={formData.nom}
+                                        onChange={handleChange}
+                                        placeholder="First Name"
+                                        required
+                                    />
+                                </Col>
+                                <Col sm={6} className="px-1">
+                                    <input
+                                        type="text"
+                                        id="prenom"
+                                        name="prenom"
+                                        value={formData.prenom}
+                                        placeholder="Last Name"
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </Col>
+                                <Col sm={6} className="px-1">
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        value={formData.email}
+                                        placeholder="Email Adress"
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </Col>
+                                <Col sm={6} className="px-1">
+                                    <input
+                                        type="text"
+                                        id="phone"
+                                        name="phone"
+                                        value={formData.phone}
+                                        placeholder="Phone No."
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </Col>
+                                <Col sm={6} className="px-1">
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        name="password"
+                                        value={formData.password}
+                                        placeholder="Password"
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </Col>
+                                <Col sm={6} className="px-1">
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        name="pas"
+                                        placeholder="Confirme Password"
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </Col>
+                                <button type="submit">Sign Up</button>
+                    {success && <Col> <p className="success-message">{success}</p> </Col>}
+                    {error && <Col> <p className="error-message">{error}</p> </Col>}
+                    <div className="login-link">
+                        <p>Already have an account? <a href="/users/login">Log in</a></p>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="prenom">Prénom</label>
-                        <input
-                            type="text"
-                            id="prenom"
-                            name="prenom"
-                            value={formData.prenom}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="phone">Phone</label>
-                        <input
-                            type="text"
-                            id="phone"
-                            name="phone"
-                            value={formData.phone}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="username">Username</label>
-                        <input
-                            type="text"
-                            id="username"
-                            name="username"
-                            value={formData.username}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="password">Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <button type="submit">Sign Up</button>
-                </form>
-                {success && <p className="success-message">{success}</p>}
-                {error && <p className="error-message">{error}</p>}
-                <div className="login-link">
-                    <p>Already have an account? <a href="/users/login">Log in</a></p>
-                </div>
-            </div>
-        </div>
-    );
-};
+                </Row>
+            </form>
+                    </Col>
+                </Row>
+            </Container>
+        </section>)
+                };
 
-export default SignUp;
+                export default SignUp;

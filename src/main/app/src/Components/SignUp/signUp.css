@@ -1,77 +1,101 @@
-.signup{
-    width: 100%;
+/* signUp.css */
+.contact {
+    background: linear-gradient(135deg, #811aff, #4da6ff); /* Dégradé de bleu */
+    color: white;
+    padding: 50px 0;
     min-height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    background:url('../../assets/back.jpg');
-    background-size: cover;
-    background-position: center;
-}
-.login-link {
-    margin-top: 20px;
-    text-align: center;
+    justify-content: center;
 }
 
-.login-link p {
-    margin: 0;
-}
-
-.login-link a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-.login-link a:hover {
-    text-decoration: underline;
-}
-
-.signup-container {
-    max-width: 500px;
+.contact img {
     width: 100%;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
+    height: auto;
     border-radius: 10px;
-    z-index: 10;
-    background:url('../../assets/backLog.jpg');
-    background-size: cover;
-    background-position: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.signup-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
+.contact h1 {
+    font-size: 60px;
+    margin-bottom: 10px;
+    margin-left: 55px;
+    color: #ffffff;
     font-weight: bold;
 }
 
-.form-group input {
+.contact form {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    max-width: 500px; /* Augmenter la largeur maximale du formulaire */
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-left: 44px;
 }
 
-button {
+.contact input[type="text"],
+.contact input[type="email"],
+.contact input[type="password"] {
     width: 100%;
-    padding: 10px;
-    background-color: #303b67;
+    padding: 10px; /* Augmenter la taille du padding */
+    margin: 15px 0; /* Augmenter la marge */
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
     color: white;
+    font-size: 16px; /* Augmenter la taille de la police */
+}
+
+.contact input[type="text"]::placeholder,
+.contact input[type="email"]::placeholder,
+.contact input[type="password"]::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.contact button[type="submit"] {
+    background-color: #4211d9;
+    color: white;
+    padding: 15px; /* Augmenter la taille du padding */
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 20px; /* Augmenter la taille de la police */
 }
 
-button:hover {
-    background-color: #004683;
+.contact button[type="submit"]:hover {
+    background-color: #003380;
+}
+
+.success-message {
+    color: #28a745;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.error-message {
+    color: #dc3545;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.login-link {
+    margin-top: 20px;
+    color: #ffffff;
+}
+
+.login-link a {
+    color: #ffd700;
+    text-decoration: underline;
+}
+
+.login-link a:hover {
+    color: #ffcc00;
+    text-decoration: none;
 }

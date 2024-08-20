@@ -1,77 +1,93 @@
 .login {
-    width: 100%;
+    background: linear-gradient(135deg, #360473, #863dd2);
+    color: white;
     min-height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    background:url('../../assets/back.jpg');
-    background-size: cover;
-    background-position: center;
+    justify-content: center;
+    padding: 50px 0;
 }
 
-.login-container {
-    max-width: 400px;
+.login img {
     width: 100%;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
+    height: auto;
     border-radius: 10px;
-    z-index: 10;
-    background:url('../../assets/backLog.jpg');
-    background-size: cover;
-    background-position: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.login-container h2 {
-    margin-bottom: 20px;
-    text-align: center;
+.login h1 {
+    font-size: 60px;
+    margin-bottom: 10px;
+    margin-left: 55px;
+    color: #ffffff;
+    font-weight: bold;
 }
 
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.form-group input {
+.login form {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
+    max-width: 500px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-left: 44px;
+}
+
+.login input[type="email"],
+.login input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    margin: 15px 0;
+    border: none;
     border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 16px;
 }
 
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #004683;
-    color: #fff;
+.login input[type="email"]::placeholder,
+.login input[type="password"]::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.login button[type="submit"] {
+    background: linear-gradient(135deg, #360473, #6526a2);
+    color: white;
+    padding: 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+    font-size: 20px;
 }
 
-button:hover {
-    background-color: #0056b3;
+.login button[type="submit"]:hover {
+    background-color: #003380;
+}
+
+.error-message {
+    color: #dc3545;
+    margin-top: 20px;
+    font-weight: bold;
+    text-align: center;
 }
 
 .signup-link {
     margin-top: 20px;
+    color: #ffffff;
     text-align: center;
 }
 
-.signup-link p {
-    margin: 0;
-}
-
 .signup-link a {
-    color: #004683;
-    text-decoration: none;
+    color: #ffd700;
+    text-decoration: underline;
 }
 
 .signup-link a:hover {
-    text-decoration: underline;
+    color: #ffcc00;
+    text-decoration: none;
 }

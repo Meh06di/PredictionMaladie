@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import login from '../../assets/login.png'
 import './Login.css';
 
 const Login = () => {
@@ -39,40 +41,49 @@ const Login = () => {
     };
 
     return (
-        <div className="login">
-            <div className="login-container">
-                <h2>Login</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="password">Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <button type="submit">Log In</button>
-                </form>
-                {error && <p className="error-message">{error}</p>}
-                <div className="signup-link">
-                    <p>Don't have an account? <a href="/users/signUp">Sign up</a></p>
-                </div>
-            </div>
-        </div>
+        <section className="login" id="connect">
+            <Container>
+                <Row className="align-items-center">
+                    <Col md={6}>
+                        <img src={login} alt="login image" />
+                    </Col>
+                    <Col md={6}>
+                        <h1>Login</h1>
+                        <form onSubmit={handleSubmit}>
+                            <Row>
+                                <Col sm={12} className="px-1">
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        placeholder="Email Address"
+                                        required
+                                    />
+                                </Col>
+                                <Col sm={12} className="px-1">
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        name="password"
+                                        value={formData.password}
+                                        onChange={handleChange}
+                                        placeholder="Password"
+                                        required
+                                    />
+                                </Col>
+                                <button type="submit">Log In</button>
+                                {error && <Col><p className="error-message">{error}</p></Col>}
+                                <div className="signup-link">
+                                    <p>Don't have an account? <a href="/users/signUp">Sign up</a></p>
+                                </div>
+                            </Row>
+                        </form>
+                    </Col>
+                </Row>
+            </Container>
+        </section>
     );
 };
 
