@@ -13,8 +13,8 @@ const App = () => {
             <Nav />
             <section id="home">
                 <Header />
-                <Description />
-            </section>
+
+            </section><Description />
             <Title title="Principales Fonctionnalités" />
             <Fonction />
             <Title title="À Propos De Nous" />

@@ -71,7 +71,7 @@ const Dashboard = () => {
                         <a href="#"
                            className={`nav-link ${activeComponent === 'symptoms' ? 'active' : ''}`}
                            onClick={() => setActiveComponent('symptoms')}>
-                            Symptoms
+                            History
                         </a>
                     </li>
                     <li>
