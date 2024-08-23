@@ -4,8 +4,8 @@ import './ProfileComponent.css';
 
 const ProfileComponent = () => {
     const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
+        nom: '',
+        prenom: '',
         username: '',
         email: '',
         password: '',

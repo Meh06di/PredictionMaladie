@@ -3,7 +3,7 @@ import Select from 'react-select';
 import './ChoixSymp.css';
 import symptomsData from './Symp.json';
 
-const SymptomSelector = () => {
+const SymptomSelector = ({ onPrediction }) => {
     const [selectedSymptoms, setSelectedSymptoms] = useState([]);
     const [prediction, setPrediction] = useState('');
     const [error, setError] = useState('');
@@ -83,7 +83,7 @@ const SymptomSelector = () => {
     return (
         <div className="symptom-page">
             <h1 className="page-title">Disease Prediction</h1>
-            <p className="page-subtitle">Select your symptoms to predict potential diseases based on your input.</p> {/* Sous-titre ajouté */}
+            <p className="page-subtitle">Select your symptoms to predict potential diseases based on your input.</p>
             <main className="page-main">
                 <div className="prediction-container">
                     <h2>Select Symptoms</h2>
@@ -110,6 +110,11 @@ const SymptomSelector = () => {
                             <span className="dot">.</span>
                         </div>
                     )}
+                    <p className="form-note">
+                        <span className="form-note-highlight">Please note:</span> This tool provides a general
+                        prediction based on your symptoms. For accurate medical advice, consult a healthcare
+                        professional.
+                    </p>
                 </div>
                 {showModal && (
                     <div className="modal-overlay">
@@ -123,9 +128,17 @@ const SymptomSelector = () => {
                             <h3 className="result">
                                 Prediction Result: <span className="prediction-highlight">{prediction}</span>
                             </h3>
-                            <button onClick={handleCloseModal} className="modal-close-button">
-                                OK
-                            </button>
+                            <div className="modal-footer">
+                                <button onClick={handleCloseModal} className="modal-close-button">
+                                    OK
+                                </button>
+                                <button
+                                    onClick={() => onPrediction(prediction)}
+                                    className="modal-more-details-button"
+                                >
+                                    More Details
+                                </button>
+                            </div>
                         </div>
                     </div>
                 )}

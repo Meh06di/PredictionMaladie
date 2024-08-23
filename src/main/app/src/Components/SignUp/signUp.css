@@ -74,13 +74,13 @@
 }
 
 .success-message {
-    color: #28a745;
+    color: #22ff22;
     margin-top: 20px;
     font-weight: bold;
 }
 
 .error-message {
-    color: #dc3545;
+    color: #ea0018;
     margin-top: 20px;
     font-weight: bold;
 }

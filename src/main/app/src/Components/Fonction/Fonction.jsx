@@ -17,7 +17,7 @@ const Fonction = () => {
       </div>
       <div className='fonction'>
         <img src={chat} alt="Chatbot" />
-        <p>Communiquer avec le chatbot pour des détails</p>
+        <p>Communiquer avec le chatbot pour détails</p>
       </div>
     </div>
   )

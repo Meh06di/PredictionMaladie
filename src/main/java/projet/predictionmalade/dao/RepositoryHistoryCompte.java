@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.UUID;
 
 public interface RepositoryHistoryCompte extends JpaRepository<HistoryCompte, Long> {
-    List<HistoryCompte> findByUserId(UUID userId);
+    List<HistoryCompte> findByUserId(UUID user);
 }

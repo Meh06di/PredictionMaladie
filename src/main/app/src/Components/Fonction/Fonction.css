@@ -20,19 +20,33 @@
     border-radius: 10px;
     display: block;
     object-fit: cover; /* Ajuste l'image pour qu'elle couvre le conteneur */
+    transition: transform 0.3s ease-in-out; /* Ajoute une transition pour un effet survol */
+}
+
+.fonction img:hover {
+    transform: scale(1.05); /* Agrandit légèrement l'image au survol */
 }
 
 .fonction p {
-    margin-top: 10px; /* Espace au-dessus de la description */
+    margin-top: 20px; /* Espace au-dessus de la description */
     font-size: 20px;
     color: #131212;
     line-height: 1.4; /* Améliore la lisibilité */
+    padding: 0 10px; /* Ajoute un peu de padding pour éviter que le texte ne touche les bords */
 }
 
 /* Styles pour les écrans plus petits */
 @media (max-width: 768px) {
     .fonction {
         flex-basis: 48%; /* Chaque fonction prend environ la moitié de la largeur */
+    }
+
+    .fonction p {
+        font-size: 18px; /* Réduire légèrement la taille de la police */
+    }
+
+    .fonction img {
+        max-height: 240px; /* Réduire la hauteur maximale des images sur les petits écrans */
     }
 }
 
@@ -46,6 +60,11 @@
     }
 
     .fonction p {
-        font-size: 18px; /* Réduire la taille de la police pour les petits écrans */
+        font-size: 16px; /* Réduire la taille de la police pour les petits écrans */
+        padding: 0 5px; /* Réduire le padding pour les petits écrans */
+    }
+
+    .fonction img {
+        max-height: 200px; /* Réduire la hauteur maximale des images pour les petits écrans */
     }
 }

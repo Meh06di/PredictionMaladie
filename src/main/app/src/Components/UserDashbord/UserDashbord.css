@@ -35,4 +35,93 @@
 .sidebar-nav a:hover {
     text-decoration: underline;
 }
+.modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+.modal-dialog {
+    max-width: 500px;
+    margin: 1.75rem auto;
+}
+
+/* Modal header */
+.modal-header {
+    background-color: #0066be;
+    color: #fff;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.modal-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+/* Modal body */
+.modal-body {
+    padding: 1.25rem;
+    background-color: #f8f9fa;
+    font-size: 1rem;
+}
+
+/* Modal footer */
+.modal-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    margin-left: 0.5rem;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: #035ea1;
+    border-color: #545b62;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 10px; /* Adjust padding as needed */
+    margin-bottom: 10px; /* Space between items */
+    border-radius: 4px; /* Optional: for rounded corners */
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+.nav-link.active {
+    background-color: #007bff; /* Background color for active item */
+    color: white; /* Text color for active item */
+}
+
+.nav-link:hover {
+    background-color: #0056b3; /* Background color on hover */
+    color: white; /* Text color on hover */
+}
+.logo {
+    height: 50px; /* Adjust height as needed */
+    width: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Space between text and logo */
+}

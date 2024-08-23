@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import health from '../../assets/health-summary.jpg';
 import summary from '../../assets/prediction-history.jpg';
 import tool from '../../assets/interactive-tools.jpg';
-import './HomeComponent.css'; // Create and include any specific styles if needed
+import './HomeComponent.css';
 
 const HomeComponent = () => {
+    const [username, setUsername] = useState('Guest');
+
+    useEffect(() => {
+        const storedUsername = localStorage.getItem('username');
+        if (storedUsername) {
+            setUsername(storedUsername);
+        }
+    }, []);
+
     return (
         <main className="main-content flex-grow-1">
             <Container fluid className="mt-4">
-                <h1 className="text-center text-primary mb-4">Welcome, [User's Name]</h1>
+                <h1 className="text-center text-primary mb-4">Welcome, {username}</h1>
                 <section className="intro mb-4">
                     <h2 className="text-center intro-heading mb-4">
                         This is the Functionality of Our Website

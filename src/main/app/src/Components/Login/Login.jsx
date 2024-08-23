@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import login from '../../assets/login.png'
 import './Login.css';
+import {useNavigate} from "react-router-dom";
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -10,6 +11,8 @@ const Login = () => {
     });
 
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setFormData({
@@ -30,7 +33,10 @@ const Login = () => {
                 credentials: 'include',
             });
             if (response.ok) {
-                console.log('User successfully logged in');
+                const data = await response.json();
+                setSuccess(data.message);
+                localStorage.setItem('username', data.username); // Store the username
+                navigate('/dashboard');
             } else {
                 setError('Failed to log in. Please check your credentials.');
             }

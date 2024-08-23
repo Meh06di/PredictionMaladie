@@ -4,7 +4,7 @@
     background: linear-gradient(rgba(8,0,58,0.7),rgba(8,0,58,0.7)), url('../../assets/head.jpg');
     background-size: cover;
     background-position: center;
-    color: #fff;
+    color: #fff !important;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -19,7 +19,8 @@
 
 .hero-text h1 {
     font-size: 5vw;
-    font-weight: 600;
+    font-weight: 500;
+    color: #fff !important;
     margin: 0;
 }
 .typewriter-container {

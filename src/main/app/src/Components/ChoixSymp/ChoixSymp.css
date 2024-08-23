@@ -1,7 +1,6 @@
-/* src/Components/ChoixSymp.css */
 .symptom-page {
     font-family: Arial, sans-serif;
-    padding-top: 60px; /* Ajustez si nécessaire pour le header fixe */
+    padding-top: 60px;
     text-align: center;
 }
 
@@ -42,10 +41,11 @@
     background-color: #0c5093;
     color: white;
     border: none;
-    padding: 12px 24px; /* Augmente le padding pour un bouton plus grand */
+    padding: 12px 24px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 18px; /* Augmente la taille de la police du bouton */
+    margin-bottom: 10px;
+    font-size: 18px;
 }
 
 .submit-button:hover {
@@ -83,19 +83,6 @@
     z-index: 10000;
 }
 
-.modal-close-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
-}
-
-.modal-close-button:hover {
-    background-color: #0056b3;
-}
 
 
 .modal-content h3 {
@@ -169,4 +156,71 @@ p.page-subtitle {
 }
 .prediction-container h2 {
     margin-bottom: 20px; /* Réduit l'espace en dessous du sous-titre de sélection */
+}
+.modal-footer {
+    display: flex;
+    justify-content: flex-end; /* Aligns buttons to the right side */
+    gap: 10px; /* Adds space between the buttons */
+}
+.modal-close-button,
+.modal-more-details-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Specific styles for the OK button */
+.modal-close-button {
+    background-color: #6c757d; /* Bootstrap secondary color */
+}
+
+.modal-close-button:hover,
+.modal-close-button:focus {
+    background-color: #5a6268;
+}
+
+/* Specific styles for the More Details button */
+.modal-more-details-button {
+    background-color: #007bff; /* Bootstrap primary color */
+}
+
+.modal-more-details-button:hover,
+.modal-more-details-button:focus {
+    background-color: #0056b3;
+}
+
+/* Active effects for buttons */
+.modal-close-button:active,
+.modal-more-details-button:active {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+form-note {
+    margin-top: 30px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-size: 0.9rem;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.form-note-highlight {
+    color: #fc0000; /* Red color for the text */
+    font-weight: bold; /* Optional: make it bold for emphasis */
+}
+.form-note p {
+    margin: 10px;
+}
+
+/* Optional: Add a slightly darker border and background on hover */
+.form-note:hover {
+    border-color: #ccc;
+    background-color: #f0f0f0;
 }

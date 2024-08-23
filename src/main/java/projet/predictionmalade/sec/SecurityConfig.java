@@ -54,29 +54,32 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors(withDefaults()) // Handle CORS
-                .csrf().disable() // Disable CSRF for simplicity; ensure to handle CSRF properly in production
+                .cors(withDefaults())
+                .csrf().disable()
                 .authorizeHttpRequests((requests) -> {
-                    try {
-                        requests
-                                .requestMatchers("/users/signUp", "/users/login", "/resources/**").permitAll()
-                                .anyRequest().authenticated();
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
+                    requests
+                            .requestMatchers("/users/signUp", "/users/login", "/resources/**").permitAll()
+                            .anyRequest().authenticated();
                 })
                 .formLogin(form -> form
                         .loginPage("/login")
                         .permitAll()
+                        .defaultSuccessUrl("/profile", true) // Redirect to profile after successful login
+                        .failureUrl("/login?error=true") // Redirect to login with error parameter on failure
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout=true")
                         .permitAll()
+                )
+                .exceptionHandling(exceptionHandling ->
+                        exceptionHandling
+                                .accessDeniedPage("/accessDenied") // Handle access denied
                 );
 
         return http.build();
     }
+
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {

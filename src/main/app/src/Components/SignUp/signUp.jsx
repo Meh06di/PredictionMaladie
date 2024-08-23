@@ -16,7 +16,7 @@ const SignUp = () => {
     });
 
     const [error, setError] = useState('');
-    const [success, setSuccess] = useState(''); // Ajoutez cette ligne pour définir success
+    const [success, setSuccess] = useState('');
 
     const handleChange = (e) => {
         setFormData({
@@ -37,7 +37,7 @@ const SignUp = () => {
                 credentials: 'include',
             });
             if (response.ok) {
-                setSuccess('Registration successful!'); // Exemple de message de succès
+                setSuccess('Registration successful!');
             } else {
                 setError('Failed to sign up. Please check your details.');
             }
@@ -104,6 +104,16 @@ const SignUp = () => {
                                 </Col>
                                 <Col sm={6} className="px-1">
                                     <input
+                                        type="text"
+                                        id="username"
+                                        name="username"
+                                        placeholder="Username"
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </Col>
+                                <Col sm={6} className="px-1">
+                                    <input
                                         type="password"
                                         id="password"
                                         name="password"
@@ -113,16 +123,7 @@ const SignUp = () => {
                                         required
                                     />
                                 </Col>
-                                <Col sm={6} className="px-1">
-                                    <input
-                                        type="password"
-                                        id="password"
-                                        name="pas"
-                                        placeholder="Confirme Password"
-                                        onChange={handleChange}
-                                        required
-                                    />
-                                </Col>
+
                                 <button type="submit">Sign Up</button>
                     {success && <Col> <p className="success-message">{success}</p> </Col>}
                     {error && <Col> <p className="error-message">{error}</p> </Col>}

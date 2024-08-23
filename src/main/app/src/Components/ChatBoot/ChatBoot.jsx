@@ -13,7 +13,7 @@ const Chatbot = () => {
 
         setMessages([...messages, { text: input, sender: 'user' }]);
         setInput('');
-        setLoading(true);  // Affiche l'animation de chargement
+        setLoading(true);
 
         try {
             const response = await fetch('http://localhost:5000/chat', {
@@ -33,7 +33,7 @@ const Chatbot = () => {
         } catch (error) {
             setMessages([...messages, { text: input, sender: 'user' }, { text: 'Error: Unable to connect to the server.', sender: 'bot' }]);
         } finally {
-            setLoading(false);  // Masque l'animation de chargement
+            setLoading(false);
         }
     };
     useEffect(() => {
@@ -79,4 +79,4 @@ const Chatbot = () => {
                 };
 
 
-                export default Chatbot;
+ export default Chatbot;

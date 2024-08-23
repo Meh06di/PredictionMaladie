@@ -1,6 +1,5 @@
 package projet.predictionmalade.web;
 
-// UserController.java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,51 +8,45 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
+import projet.predictionmalade.dao.RepositoryHistoryCompte;
 import projet.predictionmalade.dao.UserRepository;
 import projet.predictionmalade.entities.HistoryCompte;
 import projet.predictionmalade.entities.User;
 import projet.predictionmalade.service.MLService;
 import projet.predictionmalade.service.UserService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.UUID;
-
-// UserController.java
-
 
 @RestController
 @RequestMapping("/users")
 @CrossOrigin(origins = "http://localhost:5173")
 public class UserController {
+
     @Autowired
     private UserService userService;
     @Autowired
     private UserRepository userRepository;
-
-
-
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private MLService mlService;
+    @Autowired
+    private RepositoryHistoryCompte historyCompteRepository;
 
     @PostMapping("/signUp")
     public ResponseEntity<?> signUp(@RequestBody User user) {
-        // Check if the email already exists
         if (userService.emailExists(user.getEmail())) {
             return ResponseEntity.badRequest().body("Email is already in use.");
         }
-
-        // Check if the username already exists
         if (userService.isUsernameExists(user.getUsername())) {
             return ResponseEntity.badRequest().body("Username is already in use.");
         }
-
-            userService.saveUser(user);
-            return ResponseEntity.ok("User registered successfully. Please check your email to confirm your account.");
-
+        userService.saveUser(user);
+        return ResponseEntity.ok("User registered successfully. Please check your email to confirm your account.");
     }
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
@@ -61,40 +54,71 @@ public class UserController {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword())
             );
-
-            // If authentication is successful, return a success message or token (JWT, etc.)
-            return ResponseEntity.ok("User successfully logged in");
-
+            User authenticatedUser = userRepository.findByEmail(user.getEmail());
+            return ResponseEntity.ok(Map.of(
+                    "message", "User successfully logged in",
+                    "username", authenticatedUser.getUsername()
+            ));
         } catch (AuthenticationException e) {
-            // If authentication fails, return an error response
-            return ResponseEntity.status(401).body("Invalid email or password");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Invalid email or password"));
         }
     }
 
-
     @GetMapping("/{username}/profil")
-    public User getProfile(@PathVariable String username) {
+    public ResponseEntity<?> getProfile(@PathVariable String username) {
         User user = userRepository.findByUsername(username);
-        return user;
+        if (user != null) {
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
     }
 
     @GetMapping("/{userId}/operations")
-    public List<HistoryCompte> getUserOperations(@PathVariable UUID userId) {
-        return userService.getUserOperations(userId);
+    public ResponseEntity<List<HistoryCompte>> getUserOperations(@PathVariable UUID userId) {
+        List<HistoryCompte> operations = historyCompteRepository.findByUserId(userId);
+        if (operations.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(operations);
+    }
+    @PutMapping("/profile")
+    public ResponseEntity<?> updateProfile(@RequestBody User user) {
+        // Logic to update the user profile
+        User existingUser = userRepository.findById(user.getId()).orElse(null);
+        if (existingUser == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+        existingUser.setNom(user.getNom());
+        existingUser.setPrenom(user.getPrenom());
+        existingUser.setUsername(user.getUsername());
+        existingUser.setEmail(user.getEmail());
+        existingUser.setPhone(user.getPhone());
+        if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+            existingUser.setPassword(user.getPassword()); // Ensure proper hashing of the password
+        }
+        userRepository.save(existingUser);
+        return ResponseEntity.ok("Profile updated successfully");
     }
 
-    @PostMapping("/{userId}/operations")
-    public void addOperation(@PathVariable UUID userId, @RequestParam String type, @RequestParam String details) {
-        userService.addOperation(userId, type, details);
+    @PostMapping("/{username}/operations")
+    public ResponseEntity<String> addOperation(@PathVariable String username, @RequestParam String type, @RequestParam String details) {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+        HistoryCompte history = new HistoryCompte();
+        history.setType(type);
+        history.setDetails(details);
+        history.setTimeTracker(LocalDateTime.now());
+        history.setUser(user);
+        historyCompteRepository.save(history);
+        return ResponseEntity.ok("Operation saved successfully");
     }
-    @Autowired
-    private MLService mlService;
 
     @PostMapping("/predict")
-    public Map<String, Object> predict(@RequestBody Map<String, Object> inputParams) {
+    public ResponseEntity<Map<String, Object>> predict(@RequestBody Map<String, Object> inputParams) {
         String prediction = mlService.getPrediction(inputParams);
-        return Map.of("prediction", prediction);
+        return ResponseEntity.ok(Map.of("prediction", prediction));
     }
 }
-
-
