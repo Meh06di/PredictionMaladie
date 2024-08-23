@@ -85,7 +85,7 @@ public class UserController {
     @PutMapping("/profile")
     public ResponseEntity<?> updateProfile(@RequestBody User user) {
         // Logic to update the user profile
-        User existingUser = userRepository.findById(user.getId()).orElse(null);
+        User existingUser = userRepository.findByEmail(user.getEmail());
         if (existingUser == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         }

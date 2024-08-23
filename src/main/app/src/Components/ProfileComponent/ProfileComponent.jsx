@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import './ProfileComponent.css';
 
@@ -8,10 +8,45 @@ const ProfileComponent = () => {
         prenom: '',
         username: '',
         email: '',
+        phone: '',
         password: '',
         confirmPassword: '',
-        phone: '',
     });
+
+    useEffect(() => {
+        const fetchProfileData = async () => {
+            const username = localStorage.getItem('username'); // Assuming you store the username in localStorage
+            try {
+                const response = await fetch(`http://localhost:8081/users/${username}/profil`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    setFormData({
+                        nom: data.nom || '',
+                        prenom: data.prenom || '',
+                        username: data.username || '',
+                        email: data.email || '',
+                        phone: data.phone || '',
+                        password: '',
+                        confirmPassword: '',
+                    });
+                } else {
+                    alert('Failed to fetch profile data.');
+                }
+            } catch (error) {
+                alert('Error occurred while fetching profile data.');
+                console.error('Error:', error);
+            }
+        };
+
+        fetchProfileData();
+    }, []);
 
     const handleChange = (e) => {
         setFormData({
@@ -26,18 +61,19 @@ const ProfileComponent = () => {
             alert("Passwords do not match!");
             return;
         }
+    try{
+        const { passwordConfirme, ...dataToSend } = formData;
 
-        try {
-            const response = await fetch('http://localhost:8081/users/profile', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-                credentials: 'include',
-            });
+        const response = await fetch('http://localhost:8081/users/profile', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(dataToSend), // Send the filtered data
+            credentials: 'include',
+        });
 
-            if (response.ok) {
+        if (response.ok) {
                 alert('Profile updated successfully!');
             } else {
                 alert('Failed to update profile.');
@@ -60,8 +96,8 @@ const ProfileComponent = () => {
                         <Col sm={9}>
                             <Form.Control
                                 type="text"
-                                name="firstName"
-                                value={formData.firstName}
+                                name="prenom"
+                                value={formData.prenom}
                                 onChange={handleChange}
                                 placeholder="Enter your first name"
                             />
@@ -75,8 +111,8 @@ const ProfileComponent = () => {
                         <Col sm={9}>
                             <Form.Control
                                 type="text"
-                                name="lastName"
-                                value={formData.lastName}
+                                name="nom"
+                                value={formData.nom}
                                 onChange={handleChange}
                                 placeholder="Enter your last name"
                             />
@@ -94,6 +130,7 @@ const ProfileComponent = () => {
                                 value={formData.username}
                                 onChange={handleChange}
                                 placeholder="Enter your username"
+                                disabled
                             />
                         </Col>
                     </Form.Group>

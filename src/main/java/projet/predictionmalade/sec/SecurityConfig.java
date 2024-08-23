@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.security.web.firewall.StrictHttpFirewall;
@@ -64,8 +66,8 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/login")
                         .permitAll()
-                        .defaultSuccessUrl("/profile", true) // Redirect to profile after successful login
-                        .failureUrl("/login?error=true") // Redirect to login with error parameter on failure
+                        .defaultSuccessUrl("/profile", true)
+                        .failureUrl("/login?error=true")
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
@@ -74,8 +76,19 @@ public class SecurityConfig {
                 )
                 .exceptionHandling(exceptionHandling ->
                         exceptionHandling
-                                .accessDeniedPage("/accessDenied") // Handle access denied
+                                .accessDeniedPage("/accessDenied")
                 );
+           http.sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                .and().httpBasic() // For debugging, adds basic auth to check if it helps avoid redirects
+                .and().apply(new SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity>() {
+                    @Override
+                    public void configure(HttpSecurity http) {
+                        http.setSharedObject(CorsConfigurationSource.class, corsConfigurationSource());
+                    }
+                });
+
+
 
         return http.build();
     }
