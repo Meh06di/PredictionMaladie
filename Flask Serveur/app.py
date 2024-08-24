@@ -3,20 +3,16 @@ from flask_cors import CORS
 from model import predict_disease
 from langchain_ollama import OllamaLLM
 from langchain_core.prompts import ChatPromptTemplate
-import time
 import logging
 from dotenv import load_dotenv
 
 load_dotenv()
 
-# Initialiser l'application Flask
 app = Flask(__name__)
 CORS(app)
 
-# Configurer les logs
 logging.basicConfig(level=logging.DEBUG)
 
-# Définir le modèle et le template de LangChain
 template = """
 Answer the question below.
 Here is the conversation history: {context}
@@ -32,7 +28,7 @@ def predict():
     try:
         data = request.get_json()
         symptoms = data.get('symptoms')
-        print("Received symptoms:", symptoms)  # Debug print statement
+        logging.debug(f"Received symptoms: {symptoms}")  # Debug print statement
 
         if not symptoms or not isinstance(symptoms, list):
             raise ValueError("Invalid input. Please provide a list of symptoms.")
@@ -43,7 +39,7 @@ def predict():
     except ValueError as e:
         return jsonify({'error': str(e)}), 400
     except Exception as e:
-        print(f"Unexpected error: {e}")  # Print any unexpected errors
+        logging.error(f"Unexpected error: {e}")  # Print any unexpected errors
         return jsonify({'error': 'Internal Server Error'}), 500
 
 @app.route('/chat', methods=['POST'])
@@ -55,7 +51,7 @@ def chat():
         logging.error("No message provided.")
         return jsonify({"error": "No message provided."}), 400
 
-    for attempt in range(5):  # Retry up to 5 times
+    for attempt in range(5):
         try:
             logging.debug(f"Attempt {attempt + 1}: Sending request to LangChain API")
 

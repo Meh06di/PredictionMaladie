@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import './ProfileComponent.css';
+import Swal from 'sweetalert2';
 
 const ProfileComponent = () => {
     const [formData, setFormData] = useState({
@@ -58,28 +59,47 @@ const ProfileComponent = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (formData.password !== formData.confirmPassword) {
-            alert("Passwords do not match!");
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Passwords do not match!',
+            });
             return;
         }
-    try{
-        const { passwordConfirme, ...dataToSend } = formData;
 
-        const response = await fetch('http://localhost:8081/users/profile', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(dataToSend), // Send the filtered data
-            credentials: 'include',
-        });
+        try {
+            const { confirmPassword, ...dataToSend } = formData;
 
-        if (response.ok) {
-                alert('Profile updated successfully!');
+            const response = await fetch('http://localhost:8081/users/profile', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dataToSend),
+                credentials: 'include',
+            });
+
+            if (response.ok) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: 'Profile updated successfully!',
+                    timer: 2000,
+                    showConfirmButton: false,
+                });
             } else {
-                alert('Failed to update profile.');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Failed',
+                    text: 'Failed to update profile.',
+                });
             }
         } catch (error) {
-            alert('Error occurred while updating profile.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error occurred while updating profile.',
+            });
             console.error('Error:', error);
         }
     };

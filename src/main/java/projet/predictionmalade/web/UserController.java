@@ -2,6 +2,7 @@ package projet.predictionmalade.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -35,6 +36,8 @@ public class UserController {
     private MLService mlService;
     @Autowired
     private RepositoryHistoryCompte historyCompteRepository;
+    @Autowired
+    public PasswordEncoder passwordEncoder;
 
     @PostMapping("/signUp")
     public ResponseEntity<?> signUp(@RequestBody User user) {
@@ -84,22 +87,24 @@ public class UserController {
     }
     @PutMapping("/profile")
     public ResponseEntity<?> updateProfile(@RequestBody User user) {
-        // Logic to update the user profile
-        User existingUser = userRepository.findByEmail(user.getEmail());
+
+        User existingUser = userRepository.findByUsername(user.getUsername());
         if (existingUser == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         }
+
+
         existingUser.setNom(user.getNom());
         existingUser.setPrenom(user.getPrenom());
-        existingUser.setUsername(user.getUsername());
-        existingUser.setEmail(user.getEmail());
+        existingUser.setEmail(user.getEmail()); // Now this works as expected
         existingUser.setPhone(user.getPhone());
         if (user.getPassword() != null && !user.getPassword().isEmpty()) {
-            existingUser.setPassword(user.getPassword()); // Ensure proper hashing of the password
+            existingUser.setPassword(passwordEncoder.encode(user.getPassword())); // Ensure proper hashing of the password
         }
         userRepository.save(existingUser);
         return ResponseEntity.ok("Profile updated successfully");
     }
+
 
     @PostMapping("/{username}/operations")
     public ResponseEntity<String> addOperation(@PathVariable String username, @RequestParam String type, @RequestParam String details) {
