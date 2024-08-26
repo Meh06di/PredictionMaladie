@@ -16,7 +16,7 @@ const ProfileComponent = () => {
 
     useEffect(() => {
         const fetchProfileData = async () => {
-            const username = localStorage.getItem('username'); // Assuming you store the username in localStorage
+            const username = localStorage.getItem('username');
             try {
                 const response = await fetch(`http://localhost:8081/users/${username}/profil`, {
                     method: 'GET',
@@ -223,5 +223,4 @@ const ProfileComponent = () => {
         </div>
     );
 };
-
 export default ProfileComponent;

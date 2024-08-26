@@ -15,6 +15,7 @@ const Dashboard = () => {
     const [showModal, setShowModal] = useState(false);
     const [prediction, setPrediction] = useState('');
 
+
     useEffect(() => {
         const storedUsername = localStorage.getItem('username');
         if (storedUsername) {
@@ -38,23 +39,6 @@ const Dashboard = () => {
         setActiveComponent('consultations');
     };
 
-    const examplePredictions = [
-        {
-            date: '2024-08-15',
-            symptoms: 'Fever, Cough, Shortness of breath',
-            result: 'Possible flu',
-        },
-        {
-            date: '2024-08-14',
-            symptoms: 'Headache, Nausea, Fatigue',
-            result: 'Possible migraine',
-        },
-        {
-            date: '2024-08-13',
-            symptoms: 'Sore throat, Runny nose, Mild fever',
-            result: 'Possible cold',
-        }
-    ];
 
     const renderContent = () => {
         switch (activeComponent) {
@@ -63,7 +47,7 @@ const Dashboard = () => {
             case 'Disease Prediction':
                 return <SymptomsComponent onPrediction={handlePrediction} />;
             case 'symptoms':
-                return <HistoryComponent predictions={examplePredictions} />;
+                return <HistoryComponent username={username}/>;
             case 'consultations':
                 return <ConsultationsComponent prediction={prediction} />;
             case 'profile':

@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.*;
 import projet.predictionmalade.dao.RepositoryHistoryCompte;
 import projet.predictionmalade.dao.UserRepository;
 import projet.predictionmalade.entities.HistoryCompte;
+import projet.predictionmalade.entities.PredictionRequest;
 import projet.predictionmalade.entities.User;
 import projet.predictionmalade.service.MLService;
 import projet.predictionmalade.service.UserService;
+import projet.predictionmalade.service.PredictionService;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -77,14 +80,8 @@ public class UserController {
         }
     }
 
-    @GetMapping("/{userId}/operations")
-    public ResponseEntity<List<HistoryCompte>> getUserOperations(@PathVariable UUID userId) {
-        List<HistoryCompte> operations = historyCompteRepository.findByUserId(userId);
-        if (operations.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(operations);
-    }
+
+
     @PutMapping("/profile")
     public ResponseEntity<?> updateProfile(@RequestBody User user) {
 
@@ -120,10 +117,43 @@ public class UserController {
         historyCompteRepository.save(history);
         return ResponseEntity.ok("Operation saved successfully");
     }
-
-    @PostMapping("/predict")
-    public ResponseEntity<Map<String, Object>> predict(@RequestBody Map<String, Object> inputParams) {
-        String prediction = mlService.getPrediction(inputParams);
-        return ResponseEntity.ok(Map.of("prediction", prediction));
+    @GetMapping("/{username}/history")
+    public ResponseEntity<?> getUserHistoryByUsername(@PathVariable String username) {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+        List<HistoryCompte> history = historyCompteRepository.findByUserId(user.getId());
+        return ResponseEntity.ok(history);
     }
+    @Autowired
+    private PredictionService predictionService;
+
+
+    @PostMapping("/{username}/savePrediction")
+    public ResponseEntity<Map<String, String>> savePrediction(
+            @PathVariable String username,
+            @RequestBody PredictionRequest request) {
+
+        try {
+            predictionService.savePrediction(username, request.getPrediction(), request.getSymptoms());
+            return ResponseEntity.ok(Map.of("status", "success", "message", "Prediction saved successfully"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("status", "error", "message", "Failed to save prediction"));
+        }
+    }
+    @GetMapping("/{username}/predictions")
+    public ResponseEntity<?> getUserPredictions(@PathVariable String username) {
+        try {
+            List<Map<String, Object>> predictions = predictionService.getPredictionsByUsername(username);
+            if (predictions.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No predictions found for user");
+            }
+            return ResponseEntity.ok(predictions);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
 }

@@ -6,6 +6,6 @@ import projet.predictionmalade.entities.HistoryCompte;
 import java.util.List;
 import java.util.UUID;
 
-public interface RepositoryHistoryCompte extends JpaRepository<HistoryCompte, Long> {
-    List<HistoryCompte> findByUserId(UUID user);
+public interface RepositoryHistoryCompte extends JpaRepository<HistoryCompte, UUID> {
+    List<HistoryCompte> findByUserId(UUID userId);
 }

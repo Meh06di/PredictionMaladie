@@ -84,6 +84,8 @@ public class UserService {
         return (List<Malade>) user.getMalades();
     }
 
+
+
 }
 
 

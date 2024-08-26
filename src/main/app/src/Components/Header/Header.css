@@ -18,10 +18,14 @@
 }
 
 .hero-text h1 {
-    font-size: 5vw;
-    font-weight: 500;
-    color: #fff !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 5vw !important;
+    font-weight: 700; /* Bold */
+    color: #fff !important; /* White color */
     margin: 0;
+    text-transform: uppercase; /* Optional: Uppercase letters */
+    letter-spacing: 1px; /* Optional: Letter spacing */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Optional: Text shadow */
 }
 .typewriter-container {
     display: inline-block;

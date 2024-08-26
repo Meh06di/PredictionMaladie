@@ -12,7 +12,6 @@
 
 .page-header {
     text-align: center;
-    margin-bottom: 10px;
 }
 
 .page-main {
@@ -24,7 +23,7 @@
 
 .prediction-container {
     width: 100%;
-    max-width: 600px; /* Augmentez la largeur maximale pour le div */
+    max-width: 600px;
     padding: 30px; /* Augmentez le padding pour plus d'espace intérieur */
     background-color: #f9f9f9;
     border-radius: 8px;
@@ -33,12 +32,16 @@
 }
 
 .prediction-container h2 {
-    margin-bottom: 20px; /* Ajoute un espace entre le titre et le sélecteur */
+    margin-bottom: 10px; /* Ajoute un espace entre le titre et le sélecteur */
 }
 
 .symptom-select {
-    width: 100%; /* Assure que le sélecteur occupe toute la largeur du conteneur */
+    width: 100%;
     margin-bottom: 20px;
+    padding: 10px; /* Add padding for a better feel */
+    border-radius: 5px;
+    font-size: 1.1em;
+    background-color: #ffffff; /* White background for contrast */
 }
 
 .submit-button {
@@ -50,10 +53,12 @@
     cursor: pointer;
     margin-bottom: 10px;
     font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
 }
 
 .submit-button:hover {
     background-color: #092d56;
+    transform: translateY(-3px);
 }
 
 .page-footer {
@@ -97,12 +102,11 @@
     margin-top: 20px;
 }
 .modal-content .prediction-highlight {
-    font-size: 1em; /* Augmente la taille du texte pour le résultat de la prédiction */
+    font-size: 1.3em; /* Augmente la taille du texte pour le résultat de la prédiction */
     font-weight: bold; /* Rend le texte en gras */
     color: red;
 }
 
-/* Styles de la liste des symptômes */
 .modal-content ul {
     list-style-type: none;
     padding: 0;
@@ -139,7 +143,7 @@ h1.page-title {
     color: #0c5093;
 }
 p.page-subtitle {
-    margin-bottom: 30px;
+    margin-bottom: 30px !important;
     font-size: 1.2em;
     color: #666;
     text-align: center;
@@ -147,8 +151,8 @@ p.page-subtitle {
 h1.page-title {
     font-size: 2.5em;
     color: #0c5093;
-    padding-top: 20px;
-    margin-bottom: 20px;
+    padding-top: 10px;
+    margin-bottom: 10px !important;
 }
 
 p.page-subtitle {
@@ -179,7 +183,6 @@ p.page-subtitle {
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Specific styles for the OK button */
 .modal-close-button {
     background-color: #6c757d; /* Bootstrap secondary color */
 }
@@ -204,7 +207,7 @@ p.page-subtitle {
 .modal-more-details-button:active {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-form-note {
+.form-note {
     margin-top: 30px;
     padding: 15px;
     border: 1px solid #ddd;
@@ -213,18 +216,39 @@ form-note {
     font-size: 0.9rem;
     text-align: center;
     line-height: 1.5;
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth transition */
 }
 
 .form-note-highlight {
-    color: #fc0000; /* Red color for the text */
-    font-weight: bold; /* Optional: make it bold for emphasis */
+    color: #e63946; /* Brighter red for highlight */
+    font-weight: bold;
 }
+
 .form-note p {
     margin: 10px;
 }
 
-/* Optional: Add a slightly darker border and background on hover */
 .form-note:hover {
     border-color: #ccc;
     background-color: #f0f0f0;
+}
+.prediction-container {
+    width: 100%;
+    max-width: 700px; /* Slightly wider container for more content space */
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px; /* More rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+    text-align: center;
+    transition: transform 0.3s ease-in-out; /* Smooth transition on hover */
+}
+
+.prediction-container:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+}
+
+.prediction-container h2 {
+    margin-bottom: 20px;
+    font-size: 1.8em; /* Slightly larger for prominence */
+    color: #0c5093;
 }

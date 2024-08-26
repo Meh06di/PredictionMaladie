@@ -4,7 +4,7 @@ import './Chatbot.css';
 const Chatbot = () => {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
-    const [loading, setLoading] = useState(false);  // État de chargement
+    const [loading, setLoading] = useState(false);
     const messagesEndRef = useRef(null);
 
     const handleSubmit = async (e) => {

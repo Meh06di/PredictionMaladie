@@ -137,5 +137,4 @@ const SignUp = () => {
             </Container>
         </section>)
                 };
-
-                export default SignUp;
+export default SignUp;

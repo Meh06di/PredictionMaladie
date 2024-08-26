@@ -35,7 +35,8 @@ const Login = () => {
             if (response.ok) {
                 const data = await response.json();
                 setSuccess(data.message);
-                localStorage.setItem('username', data.username); // Store the username
+                localStorage.setItem('username', data.username);
+
                 navigate('/dashboard');
             } else {
                 setError('Failed to log in. Please check your credentials.');

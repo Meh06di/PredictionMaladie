@@ -60,7 +60,7 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeHttpRequests((requests) -> {
                     requests
-                            .requestMatchers("/users/signUp", "/users/login", "/resources/**").permitAll()
+                            .requestMatchers("/users/signUp", "/users/login", "/*/**").permitAll()
                             .anyRequest().authenticated();
                 })
                 .formLogin(form -> form
